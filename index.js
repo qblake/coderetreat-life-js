@@ -3,7 +3,7 @@ $(document).ready(function(){
   for (var i = 0; i < 10; i++) {
     var row = "<tr height='10'>";
     for (var j = 0; j < 10; j++) {
-      row += "<td id='" + i + "-" + j + "' width='5'></td>";
+      row += "<td id='" + i + "-" + j + "' width='5' ></td>";
     }
     row += '</tr>';
     $('#life-field').append(row);
@@ -14,22 +14,26 @@ $(document).ready(function(){
 
 var LifeField = new Array();
 
-function init() {
-  init_array();
-  LifeField[0][1] = 1;
-  LifeField[1][2] = 1;
-  LifeField[2][0] = 1;
-  LifeField[2][1] = 1;
-  LifeField[2][2] = 1;
-}
-
-function init_array(){
-  for (var i = 0; i < 10; i++) {
-    LifeField[i] = new Array();
-  };
-}
 
 function draw(array){
 
 }
+
+check_array = function(arr) {
+  var res_arr = [];
+  for(var i=0; i < arr.length; i++) {
+    res_arr[i] = [];
+    for(var j=0; j< arr[i].length; j++){
+      res_arr[i][j] = new_cell_state(i,j);
+    }
+  }
+};
+
+new_cell_state = function(x,y) {
+  for(var i=x-1; i <= x+1; i++) {
+    for(var j=y-1; y <= y+1; y++) {
+      life_around = life_count_around_cell()
+    }
+  }
+};
 
