@@ -1,8 +1,3 @@
-$(document).ready(function(){
-  console.log('dfd');
-  LifeField[4][4] = 1;
-  draw();
-});
 
 var LifeField = new Array();
 
@@ -59,7 +54,7 @@ check_array = function(arr) {
       res_arr[i][j] = new_cell_state(i,j);
     }
   }
-  LifeField = res_arr;
+  return res_arr;
 };
 
 new_cell_state = function(x,y) {
@@ -71,8 +66,11 @@ new_cell_state = function(x,y) {
 life_around_count = function(x,y) {
   var life_around = 0;
   for(var i=x-1; i <= x+1; i++) {
-    for(var j=y-1; y <= y+1; y++) {
-      if ( (i == x) && (j == y)) continue;
+    for(var j=y-1; j <= y+1; j++) {
+      if ((i == x) && (j == y)) { continue; }
+      if ((i == -1) || (j == -1)) continue;
+      if ((i == LifeField.length) || (j == LifeField[0].length)) { continue; };
+
       if (LifeField[i][j] == 1) life_around +=1;
     }
   }
@@ -84,3 +82,8 @@ chech_new_state = function(i,j,life_around) {
   if ((LifeField[i][j] == 1) && ((life_around == 3) || (life_around == 2))) return 1;
   return 0;
 };
+
+function step() {
+  LifeField = check_array(LifeField);
+  draw(LifeField);
+}
