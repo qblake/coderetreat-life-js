@@ -27,13 +27,28 @@ check_array = function(arr) {
       res_arr[i][j] = new_cell_state(i,j);
     }
   }
+  LifeField = res_arr;
 };
 
 new_cell_state = function(x,y) {
-  for(var i=x-1; i <= x+1; i++) {
-    for(var j=y-1; y <= y+1; y++) {
-      life_around = life_count_around_cell()
-    }
-  }
+  var life_around = life_around_count(x,y);
+  var new_state = chech_new_state(x,y,life_around);
+  return new_state;
 };
 
+life_around_count = function(x,y) {
+  var life_around = 0;
+  for(var i=x-1; i <= x+1; i++) {
+    for(var j=y-1; y <= y+1; y++) {
+      if ( (i == x) && (j == y)) continue;
+      if (LifeField[i][j] == 1) life_around +=1;
+    }
+  }
+  return life_around;
+};
+
+chech_new_state = function(i,j,life_around) {
+  if ((LifeField[i][j] === 0) && (life_around == 3)) return 1;
+  if ((LifeField[i][j] == 1) && ((life_around == 3) || (life_around == 2))) return 1;
+  return 0;
+};
